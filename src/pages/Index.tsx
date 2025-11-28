@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MaterialsManagement } from '@/components/materials/MaterialsManagement';
+import { TimelineOverview } from '@/components/timeline/TimelineOverview';
 import { Calendar, Package, Users, Building2, Truck, LayoutGrid } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +16,7 @@ const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
 ];
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState<Tab>('materials');
+  const [activeTab, setActiveTab] = useState<Tab>('timeline');
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,6 +56,12 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="max-w-[1600px] mx-auto px-6 py-6">
+        {activeTab === 'timeline' && (
+          <div className="animate-fade-in">
+            <TimelineOverview />
+          </div>
+        )}
+
         {activeTab === 'materials' && (
           <div className="animate-fade-in">
             <div className="mb-6">
@@ -65,7 +72,7 @@ const Index = () => {
           </div>
         )}
         
-        {activeTab !== 'materials' && (
+        {activeTab !== 'materials' && activeTab !== 'timeline' && (
           <div className="flex items-center justify-center h-[60vh] text-muted-foreground">
             <div className="text-center">
               <p className="text-lg font-medium">
